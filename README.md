@@ -6,6 +6,8 @@ In this quickstart we are going to get started with Azure Communication Services
 - A Mac running [Xcode](https://developer.apple.com/xcode/), along with a valid developer certificate installed into your Keychain.
 - Create an active Communication Services resource. [Create a Communication Services resource](https://docs.microsoft.com/en-gb/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp).
 - Create a User Access Token to instantiate the call client. [Learn how to create and manage user access tokens](https://docs.microsoft.com/en-gb/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp).
+- Run the ACSNativeLogsCollector application. [ACSNativeLogsCollector](https://github.com/ibrahimmalhas/ACSNativeLogsCollector).
+  
 
 ## Setting up
 ### Installing CocoaPods
