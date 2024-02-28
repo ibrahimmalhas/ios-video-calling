@@ -1,8 +1,0 @@
-platform :ios, '13.0'
-use_frameworks!
-
-ACSFrameworkVersion = '2.8.0'
-
-target 'iOSVideo' do
-  pod 'AzureCommunicationCalling', ACSFrameworkVersion
-end
