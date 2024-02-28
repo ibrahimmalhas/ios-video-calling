@@ -34,10 +34,11 @@ end
 ![title](workflow.png)
 
 *Here is a screenshot that shows the files sent to the ACSNativeLogsCollector, txt file for issue descreption and blog file for the logs.*
+
 ![title](ACSNativeLogsCollector.png)
 
 
-- 
+
 
 ## Run the code
 - Before running the sample, you need to replace the following:
