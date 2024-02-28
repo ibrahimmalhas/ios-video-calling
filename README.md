@@ -26,7 +26,15 @@ end
 3. Run pod install.
 
 ##Application workflow with log file sharing
-![title](Images/workflow.png)
+- When user press "Report an issue", a new view will appear to add issue descreption.
+- When pressing on "Submit" button, a post method will go to "ACSNativeLogsCollector" application sending the issue descreption and all the .blog files to the machine that hosted that application.
+
+![title](workflow.png)
+
+![title](ACSNativeLogsCollector.png)
+- Here is a screenshot that shows the files sent to the ACSNativeLogsCollector
+
+- 
 
 ## Run the code
 - Before running the sample, you need to replace the following:
