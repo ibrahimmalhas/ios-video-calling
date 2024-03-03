@@ -82,6 +82,7 @@ struct ContentView: View {
     @State var remoteParticipantObserver:RemoteParticipantObserver?
     @State var pushToken: Data?
     @State var isThereAnIssue:Bool = false
+    @State var call_id: String = ""
     @State var issueDescription:String = ""
     let uploadBlogUrl: URL = URL(string:
                         "<YOUR_DEVTUNNEL_ENDPOINT>/api/File/uploadblog")!
@@ -486,16 +487,18 @@ struct ContentView: View {
         // Assuming the getSupportFiles method returns an array or similar collection.
         self.supportFiles = callClient.debugInfo.supportFiles
         
-        let requestBody = self.multipartFormDataBody(self.boundary, "blogFile", supportFiles)
-        let request = self.generateRequest(httpBody: requestBody,endpointUrl: uploadBlogUrl)
-        URLSession.shared.dataTask(with: request) { data, resp, error in
-            if let error = error {
-                print(error)
-                return
-            }
-            isThereAnIssue = false
-        }.resume()
-   
+        for file in supportFiles {
+            let requestBody = self.multipartFormDataBody(self.boundary, "blogFile", file)
+            let request = self.generateRequest(httpBody: requestBody,endpointUrl: uploadBlogUrl)
+            URLSession.shared.dataTask(with: request) { data, resp, error in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                isThereAnIssue = false
+            }.resume()
+           
+        }
         let descreptionBody = self.issueDescreptionMessage()
         let descreption = self.generateRequest(httpBody: descreptionBody, endpointUrl: uploadDescreptionUrl)
          
@@ -517,25 +520,25 @@ struct ContentView: View {
           return request
       }
       
-      private func multipartFormDataBody(_ boundary: String, _ fromName: String, _ files: [URL]) -> Data {
+      private func multipartFormDataBody(_ boundary: String, _ fromName: String, _ file: URL) -> Data {
           
           var body = Data()
          
 
-          for file in supportFiles {
+          //for file in supportFiles {
           //    if let uuid = UUID().uuidString.components(separatedBy: "-").first {
 
                   if let fileContent = try? Data(contentsOf: file){
                       body.append(fileContent)
                  // }
               }
-          }
+          //}
           
           return body
       }
     private func issueDescreptionMessage() -> Data {
         var body = Data()
-        body.append(issueDescription)
+        body.append("Last call id : " + call_id + "\n" + issueDescription)
         return body
     }
     func switchMicrophone() {
@@ -1055,6 +1058,7 @@ struct ContentView: View {
 
         self.call = call
         print("ACS CallId: \(call.id)")
+        call_id = call.id
         self.callHandler = CallHandler(self)
         self.call!.delegate = self.callHandler
         self.remoteParticipantObserver = RemoteParticipantObserver(self)
